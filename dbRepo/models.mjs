@@ -59,6 +59,12 @@ let productSchema = new mongoose.Schema({
 });
 export const productModel = mongoose.model('productItems', productSchema);
 
+let categorySchema = new mongoose.Schema({
+    category: { type: String },
+    createdOn: { type: Date, default: Date.now }
+});
+export const categoryModel = mongoose.model('categories', categorySchema);
+
 const mongodbURI = process.env.mongodbURI || "mongodb+srv://dbuser:dbpassword@cluster0.9u53wmy.mongodb.net/abcdatabase?retryWrites=true&w=majority";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////

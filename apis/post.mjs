@@ -1,5 +1,5 @@
 import express from "express";
-import { postModel, userModel } from "../dbRepo/models.mjs";
+import { postModel, userModel , productModel } from "../dbRepo/models.mjs";
 import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
 import {
@@ -35,12 +35,6 @@ router.post('/product', uploadMiddleware.any(), (req, res) => {
     const body = req.body;
 
     const token = jwt.decode(req.cookies.Token);
-    // formData.append("myFile", fileInput.files[0]);
-    //     formData.append("name", itemName);
-    //     formData.append("category", category);
-    //     formData.append("discription", discription);
-    //     formData.append("unitName", unitName);
-    //     formData.append("price", price);
 
     if ( // validation
         !body.myFile || !body.name || !body.category || !body.discription || !body.unitName || !body.price
@@ -81,9 +75,11 @@ router.post('/product', uploadMiddleware.any(), (req, res) => {
                             console.error(err)
                         }
                         postModel.create({
-                            text: body.text,
                             imageUrl: urlData[0],
-                            owner: new mongoose.Types.ObjectId(token._id)
+                            name: body.name,
+                            discription: body.discription,
+                            unit: body.unitName,
+                            price: body.price
                         },
                             (err, saved) => {
                                 if (!err) {

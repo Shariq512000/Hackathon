@@ -44,7 +44,8 @@ function AddProduct() {
             method: 'post',
             url: `${state.baseUrl}/product`,
             data: formData,
-            headers: { 'Content-Type': 'multipart/form-data' }
+            headers: { 'Content-Type': 'multipart/form-data' },
+            withCredentials: true
         })
             .then(res => {
                 setLoadTweet(!loadTweet)
