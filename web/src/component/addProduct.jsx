@@ -4,6 +4,11 @@ import { MenuItem } from "@mui/material"
 import { useState } from "react";
 import { useContext } from "react";
 import { GlobalContext } from '../context/Context';
+import IconButton from '@mui/material/IconButton';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import {Button} from "@mui/material";
+import "./addProduct.css"
+
 import axios from "axios";
 
 
@@ -12,7 +17,7 @@ function AddProduct() {
     let { state, dispatch } = useContext(GlobalContext);
 
     const [itemName, setItemName] = useState("");
-    const [category, setCategory] = useState("");
+    const [category, setCategory] = useState("Select Category");
     const [discription, setDiscription] = useState("");
     const [unitName, setUnitName] = useState("");
     const [price, setPrice] = useState("");
@@ -36,8 +41,8 @@ function AddProduct() {
         formData.append("discription", discription);
         formData.append("unitName", unitName);
         formData.append("price", price);
-        console.log("Price :" , typeof price)
-        
+        console.log("Price :", typeof price)
+
 
 
 
@@ -62,11 +67,14 @@ function AddProduct() {
 
 
     return (
-        <div>
+        <div className="cent">
 
 
             <form onSubmit={productData}>
-                <input type="file" id="picture"/>
+                <IconButton aria-label="upload picture" component="label">
+                    <input hidden accept="image/*" type="file" id="picture" />
+                    <PhotoCamera style={{ fontSize: 200 }} />
+                </IconButton>
                 <br />
                 <br />
                 <TextField
@@ -80,14 +88,16 @@ function AddProduct() {
                 <br />
                 <br />
                 <Select
+                    style={{ width: 200 }}
+                    // placeholder="Select Category"
                     value={category}
                     label="Category"
                     onChange={(e) => {
                         setCategory(e.target.value);
                     }}                >
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
+                    <MenuItem value="fruit">Fruit</MenuItem>
+                    <MenuItem value="vegetable">Vegetable</MenuItem>
+                    <MenuItem value="medicine">Medicine</MenuItem>
                 </Select>
                 <br />
                 <br />
@@ -105,16 +115,18 @@ function AddProduct() {
                 />
                 <br />
                 <br />
-                Unit Name : <TextField variant="filled"
+                <b> Unit Name :</b> <TextField variant="filled"
                     id="unitName"
                     onChange={(e) => {
                         setUnitName(e.target.value);
                     }} />
                 <br />
                 <br />
-                Price : <TextField variant="filled"
+                <b> Price : </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<TextField variant="filled"
 
+                    
                     type="number"
+
                     onChange={(e) => {
                         setPrice(e.target.value);
                     }}
@@ -122,7 +134,9 @@ function AddProduct() {
                 <br />
                 <br />
 
-                <button type="submit">Submit</button>
+                <Button variant="contained" style={{ backgroundColor: "#61B846", width: 250, height: 50, marginTop: 20, fontSize: 20 }} type="submit">
+                    Add Product
+                </Button>
 
             </form>
             <h1>Add Product</h1>
