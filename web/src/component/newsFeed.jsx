@@ -27,6 +27,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { GrUpdate } from 'react-icons/gr';
 import SearchAppBar from "./header";
 import Grid from '@mui/material/Grid';
+import Apple from "./../images/Red_Apple.jpg"
 import "./product.css";
 // import SearchAppBar from './header'
 
@@ -87,26 +88,6 @@ function PostFeed() {
     setFailUpdatedOpen(false);
   }
 
-  // let deletePost = async (_id) => {
-  //   try {
-  //     const response = await axios.delete(`${state.baseUrl}/post/${_id}`)
-  //     console.log("response: ", response.data);
-  //     setLoadPosts(!loadPosts);
-  //     setDeleteOpen(true);
-  //   }
-  //   catch (error) {
-  //     console.log("requested failed: ", error);
-  //     setFailDeleteOpen(true);
-  //   }
-  // }
-  // let editPost = (post) => {
-  //   setClickEdit(!clickEdit);
-  //   setCurrentPosts(post);
-  //   editFormik.setFieldValue("name", post.name)
-  //   editFormik.setFieldValue("price", post.price)
-  //   editFormik.setFieldValue("description", post.description)
-  // }
-
 
 
 
@@ -155,41 +136,13 @@ function PostFeed() {
         })
     },
   });
-  // const editFormik = useFormik({
-  //   initialValues: {
-  //     text: '',
-  //   },
-  //   validationSchema: validationSchema,
-  //   onSubmit: (values) => {
-  //     console.log("values: ", values);
-  //     setClickEdit(!clickEdit);
-  //     axios.put(`${state.baseUrl}/post/${currentPosts._id}`, {
-
-  //       text: editFormik.values.text,
-  //     })
-  //       .then(response => {
-  //         setUpdatedOpen(true);
-  //         let message = response.data.message;
-  //         console.log("message: ", message)
-  //         console.log("response: ", response.data);
-  //         setLoadPosts(!loadPosts);
-
-
-  //       })
-  //       .catch(err => {
-  //         setFailUpdatedOpen(true);
-  //         console.log("error: ", err);
-  //       })
-  //   },
-  // });
 
 
 
 
   return (
     <div>
-      {/* <SearchAppBar /> */}
-      <form className="form" onSubmit={formik.handleSubmit}>
+      {/* <form className="form" onSubmit={formik.handleSubmit}>
         <TextField
 
 
@@ -237,7 +190,6 @@ function PostFeed() {
 
 
 
-        {/* Successfully Alert */}
 
         <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{
           vertical: 'top',
@@ -248,7 +200,6 @@ function PostFeed() {
           </Alert>
         </Snackbar>
 
-        {/* Error Alert */}
 
         <Snackbar open={errorOpen} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{
           vertical: 'top',
@@ -259,7 +210,6 @@ function PostFeed() {
           </Alert>
         </Snackbar>
 
-        {/* Succfull Alert */}
 
         <Snackbar open={deleteOpen} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{
           vertical: 'top',
@@ -270,7 +220,6 @@ function PostFeed() {
           </Alert>
         </Snackbar>
 
-        {/* Error Alert */}
 
         <Snackbar open={failDeleteOpen} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{
           vertical: 'top',
@@ -281,8 +230,8 @@ function PostFeed() {
           </Alert>
         </Snackbar>
 
-      </form>
-      <Snackbar open={updatedOpen} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{
+      </form> */}
+      {/* <Snackbar open={updatedOpen} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{
         vertical: 'top',
         horizontal: 'center'
       }}>
@@ -297,10 +246,9 @@ function PostFeed() {
         <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
           Requested failed to Edit PostFeed!
         </Alert>
-      </Snackbar>
-      <br />
-      <br />
-      <InfiniteScroll
+      </Snackbar> */}
+
+      {/* <InfiniteScroll
         pageStart={0}
         loadMore={getAllPosts}
         hasMore={!eof}
@@ -310,94 +258,19 @@ function PostFeed() {
           {posts?.map((eachPost, i) => (
             <div key={i} className="card">
               <div className="postP">
-                <Avatar className="pof" src={profileImage} sx={{ height: 55, width: 55, top: 17 }} />
+                <img src="" alt="" />
                 <div className="nam">
-                  <h3><b>{eachPost?.owner?.firstName} {eachPost?.owner?.lastName}</b></h3>
-                  <p>{moment(eachPost.createdOn).fromNow()}</p>
+                  <h3><b>Apple</b></h3>
+                  <p>1kg</p>
                 </div>
               </div>
-              <p>{eachPost?.text}</p>
+              <p>price</p>
               <br />
               {(eachPost.imageUrl) ?
                 <img src={eachPost.imageUrl} alt="post image" />
                 :
                 null
-              }
-
-
-
-              {/* <IconButton aria-label="delete" size="large" color="red" style={{ color: "red" }} onClick={() => {
-              deletePost(eachPost?._id)
-            }} >
-              <DeleteIcon fontSize="inherit" color="red" />
-            </IconButton>
-            {
-              (clickEdit && currentPosts._id === eachPost._id) ? <IconButton aria-label="cancel" size="large" color="orange" style={{ color: "orange" }} onClick={() => {
-                editPost(eachPost)
-              }} >
-                <CancelIcon fontSize="inherit" color="orange" />
-              </IconButton> :
-                <IconButton aria-label="edit" size="large" color="green" style={{ color: "green" }} onClick={() => {
-                  editPost(eachPost)
-                }} >
-                  <EditIcon fontSize="inherit" color="green" />
-                </IconButton>
-            } */}
-
-              {/* {
-              (clickEdit && currentPosts._id === eachPost._id) ?
-                <div>
-                  <form className="form" onSubmit={editFormik.handleSubmit}>
-                    <TextField
-                      id="name"
-                      name="name"
-                      label="Name: "
-                      value={editFormik.values.name}
-                      onChange={editFormik.handleChange}
-                      error={editFormik.touched.name && Boolean(editFormik.errors.name)}
-                      helperText={editFormik.touched.name && editFormik.errors.name}
-                    />
-                    <br />
-                    <br />
-
-                    <TextField
-                      id="price"
-                      name="price"
-                      label="price: "
-                      type="number"
-                      value={editFormik.values.price}
-                      onChange={editFormik.handleChange}
-                      error={editFormik.touched.price && Boolean(editFormik.errors.price)}
-                      helperText={editFormik.touched.price && editFormik.errors.price}
-                    />
-                    <br />
-                    <br />
-
-                    <TextField
-                      id="description"
-                      name="description"
-                      label="description: "
-                      type="textarea"
-                      value={editFormik.values.description}
-                      onChange={editFormik.handleChange}
-                      error={editFormik.touched.description && Boolean(editFormik.errors.description)}
-                      helperText={editFormik.touched.description && editFormik.errors.description}
-                    />
-                    <br />
-                    <br />
-
-                    <IconButton color="primary" variant="contained" type="submit">
-
-                      <GrUpdate />
-
-                    </IconButton>
-
-
-                  </form>
-
-                </div>
-                : null
-            } */}
+              }    
 
 
 
@@ -406,7 +279,21 @@ function PostFeed() {
           ))
           }
         </div>
-      </InfiniteScroll>
+      </InfiniteScroll> */}
+      <div className="productss">
+        <div className="card">
+          <div className="postP">
+            <img src={Apple} alt="" />
+          </div>
+          <div className="nam">
+            <h3><b>Apple</b></h3>
+            <p>1kg</p>
+          </div>
+
+          <div><p>price</p></div>
+          <br />
+        </div>
+      </div>
 
 
 

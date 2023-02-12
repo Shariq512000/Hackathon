@@ -29,15 +29,21 @@ const router = express.Router()
 
 
 
-router.post('/post', uploadMiddleware.any(), (req, res) => {
+router.post('/product', uploadMiddleware.any(), (req, res) => {
 
 
     const body = req.body;
 
     const token = jwt.decode(req.cookies.Token);
+    // formData.append("myFile", fileInput.files[0]);
+    //     formData.append("name", itemName);
+    //     formData.append("category", category);
+    //     formData.append("discription", discription);
+    //     formData.append("unitName", unitName);
+    //     formData.append("price", price);
 
     if ( // validation
-        !body.text
+        !body.myFile || !body.name || !body.category || !body.discription || !body.unitName || !body.price
     ) {
         res.status(400).send({
             message: "required parameters missing",
