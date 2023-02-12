@@ -36,6 +36,9 @@ function AddProduct() {
         formData.append("discription", discription);
         formData.append("unitName", unitName);
         formData.append("price", price);
+        console.log("Price :" , typeof price)
+        
+
 
 
         // console.log(formData.get("text"));

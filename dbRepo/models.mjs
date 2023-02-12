@@ -54,7 +54,7 @@ let productSchema = new mongoose.Schema({
     category: { type: String , required: true },
     discription: { type: String , required: true },
     unit: { type:String , required: true },
-    price: { type: Number , required: true },
+    price: { type: String , required: true },
     createdOn: { type: Date, default: Date.now }
 });
 export const productModel = mongoose.model('productItems', productSchema);
