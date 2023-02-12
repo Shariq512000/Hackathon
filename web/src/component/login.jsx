@@ -196,7 +196,7 @@ function Login() {
                 </Snackbar>
             </form>
 
-            <center><Link to={"/login"} className="loginn"> Don't have an account? Register </Link></center>
+            <center><Link to={"/signup"} className="loginn"> Don't have an account? Register </Link></center>
 
 
 
