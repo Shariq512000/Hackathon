@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { boolean } from 'yup';
 // import { string } from 'yup/lib/locale';
 
 let postSchema = new mongoose.Schema({
@@ -32,7 +33,7 @@ const userSchema = new mongoose.Schema({
     lastName: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-
+    isAdmin: { type: Boolean, default: false },
     createdOn: { type: Date, default: Date.now },
 });
 
@@ -46,6 +47,17 @@ const otpSchema = new mongoose.Schema({
     createdOn: { type: Date, default: Date.now },
 });
 export const otpModel = mongoose.model('Otps', otpSchema);
+
+let productSchema = new mongoose.Schema({
+    imageUrl: { type: String, required: true },
+    name: { type: String, required: true },
+    category: { type: String , required: true },
+    discription: { type: String , required: true },
+    unit: { type:String , required: true },
+    price: { type: Number , required: true },
+    createdOn: { type: Date, default: Date.now }
+});
+export const productModel = mongoose.model('productItems', productSchema);
 
 const mongodbURI = process.env.mongodbURI || "mongodb+srv://dbuser:dbpassword@cluster0.9u53wmy.mongodb.net/abcdatabase?retryWrites=true&w=majority";
 

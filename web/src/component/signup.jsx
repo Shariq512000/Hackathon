@@ -12,6 +12,14 @@ import {
     ObjectSchema,
     StringSchema,
 } from 'yup';
+import { Link } from "react-router-dom";
+import { IconButton } from "@mui/material";
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import PhoneIcon from '@mui/icons-material/Phone';
+import EmailIcon from '@mui/icons-material/Email';
+import InputAdornment from '@mui/material/InputAdornment';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
@@ -21,6 +29,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import { useState } from "react";
 import "./signup.css";
+import Email from "@mui/icons-material/Email";
 
 
 
@@ -32,6 +41,7 @@ function Signup() {
 
     const [successOpen, setSuccessOpen] = useState(false);
     const [errorOpen, setErrorOpen] = useState(false);
+    const [passVisi, setPassVisi] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
 
 
@@ -71,7 +81,7 @@ function Signup() {
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-            dispatch({type:'CLICK_LOGIN'});
+            dispatch({ type: 'CLICK_LOGIN' });
             console.log("values: ", values);
             axios.post(`${state.baseUrl}/signup`, {
 
@@ -83,7 +93,7 @@ function Signup() {
 
             })
                 .then(response => {
-                    dispatch({type:'CLICK_LOGOUT'});
+                    dispatch({ type: 'CLICK_LOGOUT' });
                     let message = response.data.message;
                     console.log("message: ", message)
                     console.log("response: ", response.data);
@@ -92,7 +102,7 @@ function Signup() {
 
                 })
                 .catch(err => {
-                    dispatch({type:'CLICK_LOGOUT'});
+                    dispatch({ type: 'CLICK_LOGOUT' });
                     console.log("error: ", err);
                     setErrorMessage(err.response.data.message);
                     setErrorOpen(true);
@@ -100,8 +110,13 @@ function Signup() {
         },
     });
 
+    let passType = (passVisi) ? "text" : "password";
+
     return (
         <div>
+
+            <center><h1 className="saylaniT">SAYLANI WALFARE</h1></center>
+            <center><h3 className="saylaniB">ONLINE DISCOUNT STORE</h3></center>
 
             <form className="form" onSubmit={formik.handleSubmit}>
                 <TextField
@@ -112,6 +127,14 @@ function Signup() {
                     onChange={formik.handleChange}
                     error={formik.touched.firstName && Boolean(formik.errors.firstName)}
                     helperText={formik.touched.firstName && formik.errors.firstName}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="start">
+                                <AccountCircle />
+                            </InputAdornment>
+                        ),
+                    }}
+                    variant="standard"
                 />
                 <br />
                 <br />
@@ -124,6 +147,14 @@ function Signup() {
                     onChange={formik.handleChange}
                     error={formik.touched.lastName && Boolean(formik.errors.lastName)}
                     helperText={formik.touched.lastName && formik.errors.lastName}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="start">
+                                <AccountCircle />
+                            </InputAdornment>
+                        ),
+                    }}
+                    variant="standard"
                 />
                 <br />
                 <br />
@@ -137,6 +168,14 @@ function Signup() {
                     onChange={formik.handleChange}
                     error={formik.touched.email && Boolean(formik.errors.email)}
                     helperText={formik.touched.email && formik.errors.email}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="start">
+                                <EmailIcon />
+                            </InputAdornment>
+                        ),
+                    }}
+                    variant="standard"
                 />
                 <br />
                 <br />
@@ -144,26 +183,39 @@ function Signup() {
                 <TextField
                     id="password"
                     name="password"
-                    label="Password: "
-                    type="password"
+                    type={passType}
+                    label="Password"
                     value={formik.values.password}
                     onChange={formik.handleChange}
                     error={formik.touched.password && Boolean(formik.errors.password)}
                     helperText={formik.touched.password && formik.errors.password}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="start">
+                                <IconButton onClick={
+                                    () => { setPassVisi(!passVisi) }
+                                }>
+                                    {(passVisi) ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                                </IconButton>
+                            </InputAdornment>
+                        ),
+                    }}
+                    variant="standard"
                 />
                 <br />
                 <br />
 
                 {(state.clickLoad === false) ?
-                 
-                <Button color="primary" variant="outlined" type="submit">
-                    Signup
-                </Button>
-                :
-                <CircularProgress/> 
+
+                    <Button variant="contained" style={{ backgroundColor: "#61B846", width: 250, height: 50, marginTop: 20, fontSize: 20 }} type="submit">
+                        Signup
+                    </Button>
+                    :
+                    <CircularProgress />
                 }
 
-                
+
+
 
                 {/* Successfully Alert */}
 
@@ -187,6 +239,8 @@ function Signup() {
                     </Alert>
                 </Snackbar>
             </form>
+
+            <center><Link to={"/login"} className="loginn"> Already have an account? Login </Link></center>
 
 
 

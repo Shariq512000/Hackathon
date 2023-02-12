@@ -99,7 +99,7 @@ router.post('/login', (req, res) => {
     // check if user exist
     userModel.findOne(
         { email: body.email },
-        "firstName lastName email password",
+        "firstName lastName email password isAdmin",
         (err, data) => {
             if (!err) {
                 console.log("data: ", data);
@@ -134,7 +134,8 @@ router.post('/login', (req, res) => {
                                     firstName: data.firstName,
                                     lastName: data.lastName,
                                     age: data.age,
-                                    _id: data._id
+                                    _id: data._id,
+                                    isAdmin: data.isAdmin
                                 }
                             });
                             return;

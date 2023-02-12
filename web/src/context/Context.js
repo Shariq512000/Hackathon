@@ -8,7 +8,9 @@ let data = {
     clickLoad: false,
     darkTheme: true,
     user: {},
+    admin: {},
     isLogin: null,
+    adminLogin: null,
     baseUrl: (window.location.href.split(":")[0] === "http")
         ?
         `http://localhost:5001/api/v1` : `/api/v1`,
